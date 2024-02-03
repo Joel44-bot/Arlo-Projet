@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="fr-FR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" content="Bienvenue sur le site de l'Institut National de la Poste des Technologies de l'Information et de la Communication, la première école du numérique au Gabon.">
+  <meta name="author" content="">
+
+  <title>Institut National de la Poste, des Technologies de l'Information et de la communication</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900|Rubik:300,400,700" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles/bootstrap.css">
+  <link rel="stylesheet" href="css/styles/animate.css">
+  <link rel="stylesheet" href="css/styles/owl.carousel.min.css">
+
+  <link rel="stylesheet" href="fonts/ionicons/css/styles/ionicons.min.css">
+  <link rel="stylesheet" href="fonts/fontawesome/css/styles/font-awesome.min.css">
+  <link rel="stylesheet" href="css/styles/magnific-popup.css">
+
+  <!-- Theme Style -->
+  <link rel="stylesheet" href="/css/styles/style.css">
+
+  <!-- CSS FILES -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="css/bootstrap-icons.css" rel="stylesheet">
+
+  <link href="css/styles.css" rel="stylesheet">
+
+</head>
+
+<body id="section_1">
+
+  <header class="site-header">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-8 col-12 d-flex flex-wrap">
+          <p class="d-flex me-4 mb-0">
+            <i class="bi-geo-alt me-2"></i>
+            Feu Rouge Gros-Bouquet, Libreville/Gabon
+          </p>
+
+          <p class="d-flex mb-0">
+            <i class="bi-envelope me-2"></i>
+
+            <a href="inptic@inptic-ga.org / info@inptic-ga.org">
+              inptic@inptic-ga.org / info@inptic-ga.org
+            </a>
+          </p>
+        </div>
+
+        <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
+          <ul class="social-icon">
+            <li class="social-icon-item">
+              <a href="#" class="social-icon-link bi-twitter"></a>
+            </li>
+
+            <li class="social-icon-item">
+              <a href="#" class="social-icon-link bi-facebook"></a>
+            </li>
+
+            <li class="social-icon-item">
+              <a href="#" class="social-icon-link bi-instagram"></a>
+            </li>
+
+            <li class="social-icon-item">
+              <a href="#" class="social-icon-link bi-youtube"></a>
+            </li>
+
+            <li class="social-icon-item">
+              <a href="#" class="social-icon-link bi-whatsapp"></a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <nav class="navbar navbar-expand-lg bg-light shadow-lg">
+    <div class="container">
+      <a class="navbar-brand" href="acceuil.php">
+        <img src="img/logoinptic.png" class="logo img-fluid" alt="Kind Heart Charity">
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.php">Acceuil</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="formation.php">Formations</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="departement.php">Départements</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="admission.php">Admissions</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">News</a>
+
+            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+              <li><a class="dropdown-item" href="ajouterclient.php">News Listing</a></li>
+
+              <li><a class="dropdown-item" href="news-detail.html">News Detail</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="inscription.php">Concours</a>
+          </li>
+
+          <li class="nav-item ms-3">
+            <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Donate</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="news-detail-header-section text-center">
+      <div class="section-overlay"></div>
+
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-12 col-12">
+            <h1 class="text-white">Vos parametres de connexion</h1>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-12">
+            <?php
+            require 'connexion.php';
+            $id = "";
+            if (isset($_POST['enregister'])) {
+              if (getimagesize($_FILES['foto']['tmp_name']) == false) {
+                echo "Erreur";
+              } else {
+                //RECUPERER L'IMAGE
+                $image = addslashes($_FILES['foto']['tmp_name']);
+                $nomImage = addslashes($_FILES['foto']['tmp_name']);
+                $image = file_get_contents($image);
+                $image = base64_encode($image);
+
+
+                $nom = htmlspecialchars($_POST['nom']);
+                $prenom = htmlspecialchars($_POST['prenom']);
+                $mdp = htmlspecialchars($_POST['annee']);
+                //$mdp = sha1($mdp);
+
+                //DATE DE NAISSANCE
+                $annee = htmlspecialchars($_POST['date']);
+                $date1 = strtotime($annee);
+                $date2 = date('Y-m-d', $date1);
+
+
+                $sexe = htmlspecialchars($_POST['sexe']);
+                $filiere = htmlspecialchars($_POST['filiere']);
+
+                $telephone = htmlspecialchars($_POST['telephone']);
+                $adresse = htmlspecialchars($_POST['adresse']);
+                $email = htmlspecialchars($_POST['email']);
+                $profil = "Client";
+                $statut = "NON PAYER";
+
+
+                // if (!empty($nom) AND !empty($prenom) AND !empty($date2) AND !empty($sexe) AND !empty($telephone) AND !empty($mdp)) {
+                $sql = "INSERT INTO utilisateur(date_naissance,nom_user,prenom_user,tel,adresse,email,photo,mot_de_passe,sexe,code_profil,filiere,statut) VALUES ('$date2','$nom','$prenom','$telephone','$adresse','$email','$image','$mdp','$sexe','$profil','$filiere','$statut')";
+                if (mysqli_query($conn, $sql)) {
+                  $message = "Inscription effectuée avec succes";
+                  echo "'<script type='text/javascript'>alect('$message')</script>";
+                } else {
+                  $erreure = "Inscription échouée";
+                  echo "'<script type='text/javascript'>alect('$erreure')</script>";
+                }
+                $sql2 = "SELECT * FROM utilisateur WHERE nom_user='$nom' AND prenom_user='$prenom' AND date_naissance='$date2'";
+                $query2 = mysqli_query($conn, $sql2);
+                $ligne = mysqli_fetch_assoc($query2);
+                $mdp = $ligne['mot_de_passe'];
+
+                echo '
+<div class="container img-thumbnail">
+		  <div class="col-md-5 offset-md-5">
+		  Adresse Email de connexion :' . $ligne['email'] . ' 
+      <br />
+      <br />
+		  Session du concours : ' . $mdp . ' 
+      <br />
+      <br />
+	<img height="200" width="150" src="data:image;base64,' . $ligne['photo'] . '">
+	</div>
+	</div>';
+              }
+            }
+            ?>
+
+
+
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-12 mb-4">
+          <img src="img/logoinptic.png" class="logo img-fluid" alt="">
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-12 mb-4">
+          <h5 class="site-footer-title mb-3">Quick Links</h5>
+
+          <ul class="footer-menu">
+            <li class="footer-menu-item"><a href="#" class="footer-menu-link">Our Story</a></li>
+
+            <li class="footer-menu-item"><a href="#" class="footer-menu-link">Newsroom</a></li>
+
+            <li class="footer-menu-item"><a href="#" class="footer-menu-link">Causes</a></li>
+
+            <li class="footer-menu-item"><a href="#" class="footer-menu-link">Become a volunteer</a></li>
+
+            <li class="footer-menu-item"><a href="#" class="footer-menu-link">Partner with us</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-12 mx-auto">
+          <h5 class="site-footer-title mb-3">Contact Infomation</h5>
+
+          <p class="text-white d-flex mb-2">
+            <i class="bi-telephone me-2"></i>
+
+            <a href="tel: 120-240-9600" class="site-footer-link">
+              120-240-9600
+            </a>
+          </p>
+
+          <p class="text-white d-flex">
+            <i class="bi-envelope me-2"></i>
+
+            <a href="mailto:info@yourgmail.com" class="site-footer-link">
+              donate@charity.org
+            </a>
+          </p>
+
+          <p class="text-white d-flex mt-3">
+            <i class="bi-geo-alt me-2"></i>
+            Akershusstranda 20, 0150 Oslo, Norway
+          </p>
+
+          <a href="#" class="custom-btn btn mt-3">Get Direction</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-footer-bottom">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-6 col-md-7 col-12">
+            <p class="copyright-text mb-0">Copyright © 2036 <a href="#">Kind Heart</a> Charity Org.
+              Design: <a href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+          </div>
+
+          <div class="col-lg-6 col-md-5 col-12 d-flex justify-content-center align-items-center mx-auto">
+            <ul class="social-icon">
+              <li class="social-icon-item">
+                <a href="#" class="social-icon-link bi-twitter"></a>
+              </li>
+
+              <li class="social-icon-item">
+                <a href="#" class="social-icon-link bi-facebook"></a>
+              </li>
+
+              <li class="social-icon-item">
+                <a href="#" class="social-icon-link bi-instagram"></a>
+              </li>
+
+              <li class="social-icon-item">
+                <a href="#" class="social-icon-link bi-linkedin"></a>
+              </li>
+
+              <li class="social-icon-item">
+                <a href="https://youtube.com/templatemo" class="social-icon-link bi-youtube"></a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT FILES -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.sticky.js"></script>
+  <script src="js/click-scroll.js"></script>
+  <script src="js/counter.js"></script>
+  <script src="js/custom.js"></script>
+</body>
+
+</html>
